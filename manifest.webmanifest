@@ -1,0 +1,10 @@
+{
+  "name": "每日感恩・肯定語",
+  "short_name": "每日感恩",
+  "description": "一個充滿感恩與肯定語的小工具",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f1e8",
+  "theme_color": "#f7f1e8",
+  "lang": "zh-Hant"
+}
