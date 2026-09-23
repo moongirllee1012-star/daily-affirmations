@@ -1,47 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f1e8">
-  <link rel="manifest" href="./manifest.webmanifest">
+<link rel="manifest" href="./manifest.webmanifest">
+
 <title>每日感恩・肯定語</title>
 
 <style>
-*{box-sizing:border-box}
+:root{
+  --bg:#f7f1e8;
+  --card:#fffdf9;
+  --ink:#40382f;
+  --muted:#8b8176;
+  --soft:#f1e7da;
+  --line:#e8ded1;
+  --gold:#9a7650;
+}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
-  background:#f7f1e8;
-  color:#40382f;
+  background:var(--bg);
+  color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
 }
 
 main{
   max-width:600px;
   margin:auto;
-  padding:25px 16px 50px;
+  padding:18px 16px 50px;
 }
 
 .hero{
   text-align:center;
-  padding:15px 0 20px;
+  padding:14px 0 18px;
 }
 
-.hero .icon{font-size:45px}
+.hero .icon{
+  font-size:46px;
+}
 
-h1{
-  font-size:28px;
+.hero h1{
+  font-size:29px;
   margin:8px 0;
 }
 
 .subtitle{
-  color:#8b8176;
+  color:var(--muted);
 }
 
 .card{
-  background:#fffdf9;
-  border:1px solid #e8ded1;
+  background:var(--card);
+  border:1px solid var(--line);
   border-radius:22px;
   padding:20px;
   margin:14px 0;
@@ -56,17 +71,18 @@ h1{
 
 .count{
   text-align:center;
-  background:#f1e7da;
+  background:var(--soft);
   border-radius:18px;
-  padding:15px;
+  padding:14px;
 }
 
 .num{
   font-size:38px;
-  font-weight:bold;
+  font-weight:700;
 }
 
-button,input{
+button,
+input{
   font:inherit;
 }
 
@@ -79,19 +95,25 @@ button{
 
 .primary{
   width:100%;
-  background:#40382f;
-  color:white;
+  background:var(--ink);
+  color:#fff;
   margin-top:10px;
 }
 
+.secondary{
+  background:var(--soft);
+  color:var(--ink);
+}
+
 .affirm{
-  min-height:80px;
+  min-height:100px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   font-size:22px;
   line-height:1.6;
+  padding:10px;
 }
 
 .form{
@@ -101,14 +123,32 @@ button{
 
 .form input{
   flex:1;
-  border:1px solid #e8ded1;
+  min-width:0;
+  border:1px solid var(--line);
   border-radius:14px;
   padding:12px;
+  background:white;
 }
 
 .chip{
-  background:#f1e7da;
+  background:var(--soft);
   margin:5px 3px;
+}
+
+.progress{
+  height:9px;
+  background:var(--soft);
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:14px;
+}
+
+.progress > i{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--gold);
+  transition:.25s;
 }
 
 .calendar{
@@ -119,9 +159,9 @@ button{
 
 .day{
   background:white;
-  border:1px solid #e8ded1;
+  border:1px solid var(--line);
   border-radius:9px;
-  min-height:48px;
+  min-height:52px;
   padding:5px;
   font-size:12px;
 }
@@ -131,17 +171,18 @@ button{
 }
 
 .today{
-  outline:2px solid #9a7650;
+  outline:2px solid var(--gold);
 }
 
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:#0008;
+  background:#0009;
   align-items:center;
   justify-content:center;
   padding:20px;
+  z-index:20;
 }
 
 .modal-box{
@@ -150,11 +191,45 @@ button{
   padding:30px;
   text-align:center;
   max-width:400px;
+  width:100%;
 }
 
-.modal-box .big{
-  font-size:60px;
+.big{
+  font-size:64px;
 }
+
+.burst{
+  font-size:42px;
+  letter-spacing:5px;
+  animation:pop .55s ease both;
+}
+
+@keyframes pop{
+  0%{
+    transform:scale(.4);
+    opacity:0;
+  }
+  70%{
+    transform:scale(1.15);
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:19;
+}
+
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
 </style>
 </head>
 
@@ -163,10 +238,17 @@ button{
 <main>
 
 <section class="hero">
-  <div class="icon">🌿</div>
-  <h1>每日感恩・肯定語</h1>
-  <div class="subtitle">每天一點點，讓心回到自己身上。</div>
+
+<div class="icon">🌿</div>
+
+<h1>每日感恩・肯定語</h1>
+
+<div class="subtitle">
+每天一點點，讓心回到自己身上。
+</div>
+
 </section>
+
 
 <section class="card">
 
@@ -184,15 +266,25 @@ button{
 
 </div>
 
+
 <button class="primary" onclick="addThanks()">
 🙏 謝謝 +1
 </button>
+
 
 <button class="primary" onclick="addLucky()">
 🍀 我很幸運 +1
 </button>
 
+
+<div class="progress">
+<i id="thanksProgress"></i>
+</div>
+
+<p class="small" id="goalText"></p>
+
 </section>
+
 
 
 <section class="card">
@@ -201,11 +293,12 @@ button{
 
 <div class="affirm" id="affirmation"></div>
 
-<button onclick="nextAffirmation()">
+<button class="secondary" onclick="nextAffirmation()">
 換一句
 </button>
 
 </section>
+
 
 
 <section class="card">
@@ -218,7 +311,9 @@ button{
 id="customInput"
 placeholder="輸入你的肯定句">
 
-<button onclick="addCustom()">
+<button
+class="secondary"
+onclick="addCustom()">
 加入
 </button>
 
@@ -229,6 +324,7 @@ placeholder="輸入你的肯定句">
 </section>
 
 
+
 <section class="card">
 
 <h3>🪷 準提咒</h3>
@@ -236,17 +332,27 @@ placeholder="輸入你的肯定句">
 <div class="grid">
 
 <div class="count">
-<div class="num" id="mantra">0</div>
-今日遍數
+
+<div class="num" id="mantra">
+0
 </div>
 
-<button onclick="addMantra()">
+今日遍數
+
+</div>
+
+<button
+class="secondary"
+onclick="addMantra()">
+
 準提咒 +1
+
 </button>
 
 </div>
 
 </section>
+
 
 
 <section class="card">
@@ -255,35 +361,39 @@ placeholder="輸入你的肯定句">
 
 <p id="month"></p>
 
-<div class="calendar" id="calendar"></div>
+<div
+class="calendar"
+id="calendar">
+</div>
 
 </section>
 
 </main>
 
 
-<div class="modal" id="milestoneModal">
+
+<div
+class="modal"
+id="milestoneModal">
 
 <div class="modal-box">
 
-<div class="big">🙏</div>
+<div
+class="burst"
+id="burst">
+🎉 🧨 🎉
+</div>
 
-<h2>謝謝自己</h2>
+<h2 id="milestoneTitle"></h2>
 
-<p>
-你已經累積
-<b id="milestoneNumber">1000</b>
-次「謝謝」。
-</p>
+<p id="milestoneMessage"></p>
 
-<p>
-願每一次感恩，<br>
-都成為生活裡的光。
-</p>
+<button
+class="primary"
+onclick="closeModal()">
 
-<button class="primary"
-onclick="closeMilestone()">
 繼續感恩
+
 </button>
 
 </div>
@@ -291,13 +401,25 @@ onclick="closeMilestone()">
 </div>
 
 
+<canvas id="confetti"></canvas>
+
+
+
 <script>
 
-const STORAGE_KEY="daily_affirmations";
+/* =========================
+   資料儲存
+========================= */
 
-let data=JSON.parse(
+const STORAGE_KEY = "daily_affirmations";
+
+
+let data =
+JSON.parse(
 localStorage.getItem(STORAGE_KEY)
-)||{
+)
+||
+{
   thanks:0,
   lucky:0,
   mantra:{},
@@ -306,35 +428,95 @@ localStorage.getItem(STORAGE_KEY)
 };
 
 
-const defaultAffirmations=[
+
+/* =========================
+   肯定語
+========================= */
+
+const defaultAffirmations = [
+
 "我值得被好好對待。",
+
 "今天的我，已經很棒了。",
+
 "我願意相信事情會越來越好。",
+
 "我有能力創造自己喜歡的生活。",
+
 "我很幸運，也願意看見生活裡的美好。",
+
 "我感謝今天遇見的一切。",
+
 "我值得擁有幸福與豐盛。",
-"我正在一步一步成為更好的自己。"
+
+"我正在一步一步成為更好的自己。",
+
+"船到橋頭自然直，我相信事情會有最好的安排。"
+
 ];
 
 
-let affirmationIndex=0;
+let affirmationIndex = 0;
 
+
+
+/* =========================
+   今天日期
+   使用台灣手機本地時間
+========================= */
 
 function today(){
 
-return new Date()
-.toISOString()
-.slice(0,10);
+const d = new Date();
+
+return d.getFullYear()
++"-"
++String(d.getMonth()+1).padStart(2,"0")
++"-"
++String(d.getDate()).padStart(2,"0");
 
 }
 
 
+
+/* =========================
+   確保今天有紀錄
+========================= */
+
+function ensureToday(){
+
+const d = today();
+
+if(!data.records[d]){
+
+data.records[d] = {
+
+thanks:0,
+
+lucky:0,
+
+mantra:0
+
+};
+
+}
+
+}
+
+
+
+/* =========================
+   儲存
+========================= */
+
 function save(){
 
 localStorage.setItem(
+
 STORAGE_KEY,
+
 JSON.stringify(data)
+
 );
 
 render();
@@ -342,22 +524,10 @@ render();
 }
 
 
-function ensureToday(){
 
-const d=today();
-
-if(!data.records[d]){
-
-data.records[d]={
-thanks:0,
-lucky:0,
-mantra:0
-};
-
-}
-
-}
-
+/* =========================
+   謝謝 +1
+========================= */
 
 function addThanks(){
 
@@ -369,20 +539,22 @@ data.records[today()].thanks++;
 
 save();
 
-if(data.thanks%1000===0){
 
-document.getElementById(
-"milestoneNumber"
-).textContent=data.thanks;
+/* 每100次慶祝 */
 
-document.getElementById(
-"milestoneModal"
-).style.display="flex";
+if(data.thanks % 100 === 0){
+
+celebrate(data.thanks);
 
 }
 
 }
 
+
+
+/* =========================
+   我很幸運 +1
+========================= */
 
 function addLucky(){
 
@@ -397,30 +569,47 @@ save();
 }
 
 
+
+/* =========================
+   準提咒 +1
+========================= */
+
 function addMantra(){
 
-const d=today();
+const d = today();
 
-if(!data.mantra[d])
-data.mantra[d]=0;
+if(!data.mantra[d]){
+
+data.mantra[d] = 0;
+
+}
 
 data.mantra[d]++;
 
 ensureToday();
 
-data.records[d].mantra=data.mantra[d];
+data.records[d].mantra =
+data.mantra[d];
 
 save();
 
 }
 
 
+
+/* =========================
+   自訂肯定句
+========================= */
+
 function addCustom(){
 
-const input=
-document.getElementById("customInput");
+const input =
+document.getElementById(
+"customInput"
+);
 
-const text=input.value.trim();
+const text =
+input.value.trim();
 
 if(!text)return;
 
@@ -433,44 +622,64 @@ save();
 }
 
 
+
+/* =========================
+   換一句
+========================= */
+
 function nextAffirmation(){
 
-const all=
-defaultAffirmations.concat(data.custom);
+const all =
+defaultAffirmations
+.concat(data.custom);
 
 affirmationIndex++;
 
 document.getElementById(
 "affirmation"
-).textContent=
+).textContent =
 all[
-affirmationIndex%all.length
+affirmationIndex % all.length
 ];
 
 }
 
 
+
+/* =========================
+   自訂肯定句顯示
+========================= */
+
 function renderCustom(){
 
-const box=
-document.getElementById("customList");
+const box =
+document.getElementById(
+"customList"
+);
 
 box.innerHTML="";
 
-data.custom.forEach(function(text){
+data.custom.forEach(
+function(text){
 
-const button=
-document.createElement("button");
+const button =
+document.createElement(
+"button"
+);
 
-button.className="chip";
+button.className =
+"chip";
 
-button.textContent=text;
+button.textContent =
+text;
 
-button.onclick=function(){
+button.onclick =
+function(){
 
 document.getElementById(
 "affirmation"
-).textContent=text;
+).textContent =
+text;
 
 };
 
@@ -481,90 +690,174 @@ box.appendChild(button);
 }
 
 
+
+/* =========================
+   月曆
+========================= */
+
 function renderCalendar(){
 
-const calendar=
-document.getElementById("calendar");
+const calendar =
+document.getElementById(
+"calendar"
+);
 
 calendar.innerHTML="";
 
-const now=new Date();
 
-const year=now.getFullYear();
+const now = new Date();
 
-const month=now.getMonth();
+const year =
+now.getFullYear();
 
-document.getElementById("month")
-.textContent=
-year+" 年 "+(month+1)+" 月";
+const month =
+now.getMonth();
 
 
-const week=["日","一","二","三","四","五","六"];
+document.getElementById(
+"month"
+).textContent =
+year
++" 年 "
++(month+1)
++" 月";
 
-week.forEach(function(w){
 
-const e=document.createElement("div");
+const week =
+[
+"日",
+"一",
+"二",
+"三",
+"四",
+"五",
+"六"
+];
+
+
+week.forEach(
+function(w){
+
+const e =
+document.createElement(
+"div"
+);
 
 e.textContent=w;
 
-e.style.textAlign="center";
+e.style.textAlign =
+"center";
 
 calendar.appendChild(e);
 
 });
 
 
-const first=
-new Date(year,month,1).getDay();
+const first =
+new Date(
+year,
+month,
+1
+).getDay();
 
-for(let i=0;i<first;i++){
+
+for(
+let i=0;
+i<first;
+i++
+){
 
 calendar.appendChild(
-document.createElement("div")
+document.createElement(
+"div"
+)
 );
 
 }
 
 
-const last=
-new Date(year,month+1,0).getDate();
+const last =
+new Date(
+year,
+month+1,
+0
+).getDate();
 
 
-for(let day=1;day<=last;day++){
+for(
+let day=1;
+day<=last;
+day++
+){
 
-const key=
-year+"-"+
-String(month+1).padStart(2,"0")+
-"-"+
-String(day).padStart(2,"0");
+const key =
+year
++"-"
++String(month+1)
+.padStart(2,"0")
++"-"
++String(day)
+.padStart(2,"0");
 
-const record=data.records[key];
 
-const e=document.createElement("div");
+const record =
+data.records[key];
+
+
+const e =
+document.createElement(
+"div"
+);
 
 e.className="day";
 
-if(key===today())
-e.classList.add("today");
 
-if(record &&
-(record.thanks||
-record.lucky||
-record.mantra)){
+if(key===today()){
+
+e.classList.add(
+"today"
+);
+
+}
+
+
+if(
+record &&
+(
+(record.thanks||0)
++
+(record.lucky||0)
++
+(record.mantra||0)
+)
+){
 
 e.classList.add("has");
 
-e.innerHTML=
-"<b>"+day+"</b><br>"+
-"❤️"+(record.thanks||0)+
-" 🍀"+(record.lucky||0)+
-" 🪷"+(record.mantra||0);
-
-}else{
-
-e.innerHTML="<b>"+day+"</b>";
+e.innerHTML =
+"<b>"
++day
++"</b><br>"
++
+"❤️"
++(record.thanks||0)
++
+" 🍀"
++(record.lucky||0)
++
+" 🪷"
++(record.mantra||0);
 
 }
+else{
+
+e.innerHTML =
+"<b>"
++day
++"</b>";
+
+}
+
 
 calendar.appendChild(e);
 
@@ -573,20 +866,65 @@ calendar.appendChild(e);
 }
 
 
+
+/* =========================
+   畫面更新
+========================= */
+
 function render(){
 
 document.getElementById(
 "thanks"
-).textContent=data.thanks;
+).textContent =
+data.thanks;
+
 
 document.getElementById(
 "lucky"
-).textContent=data.lucky;
+).textContent =
+data.lucky;
+
 
 document.getElementById(
 "mantra"
-).textContent=
+).textContent =
 data.mantra[today()]||0;
+
+
+/* 下一個100 */
+
+const next =
+(Math.floor(
+data.thanks / 100
+)+1)*100;
+
+
+const base =
+next - 100;
+
+
+const percent =
+Math.min(
+100,
+((data.thanks-base)/100)*100
+);
+
+
+document.getElementById(
+"thanksProgress"
+).style.width =
+percent+"%";
+
+
+document.getElementById(
+"goalText"
+).textContent =
+"距離下一個 100 次里程碑："
++
+(next-data.thanks)
++
+" 次";
+
 
 renderCustom();
 
@@ -595,14 +933,235 @@ renderCalendar();
 }
 
 
+
+/* =========================
+   100次 / 1000次慶祝
+========================= */
+
+function celebrate(n){
+
+const title =
+document.getElementById(
+"milestoneTitle"
+);
+
+const message =
+document.getElementById(
+"milestoneMessage"
+);
+
+const burst =
+document.getElementById(
+"burst"
+);
+
+
+title.textContent =
+"🎉 "+n+" 次謝謝！";
+
+
+if(n % 1000 === 0){
+
+burst.textContent =
+"🙏 ✨ 🧨 ✨ 🙏";
+
+message.textContent =
+"感謝大里程碑！"
++
+"願每一次感恩，"
++
+"都成為生活裡的光。";
+
+}
+else{
+
+burst.textContent =
+"🎉 🧨 🎉";
+
+message.textContent =
+"謝謝生活，也謝謝自己。"
++
+"你正在為自己的每一天留下美好的紀錄。";
+
+}
+
+
+document.getElementById(
+"milestoneModal"
+).style.display =
+"flex";
+
+
+confetti();
+
+}
+
+
+
+/* =========================
+   關閉慶祝視窗
+========================= */
+
+function closeModal(){
+
+document.getElementById(
+"milestoneModal"
+).style.display =
+"none";
+
+}
+
+
+
+/* =========================
+   彩紙動畫
+========================= */
+
+function confetti(){
+
+const canvas =
+document.getElementById(
+"confetti"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+
+canvas.width =
+window.innerWidth;
+
+canvas.height =
+window.innerHeight;
+
+
+let particles =
+Array.from(
+{
+length:120
+},
+function(){
+
+return {
+
+x:window.innerWidth/2,
+
+y:window.innerHeight*.35,
+
+vx:(Math.random()-.5)*12,
+
+vy:-Math.random()*12-4,
+
+g:.35,
+
+s:Math.random()*7+3,
+
+a:1
+
+};
+
+});
+
+
+let frame=0;
+
+
+function animate(){
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+particles.forEach(
+function(p){
+
+p.x += p.vx;
+
+p.vy += p.g;
+
+p.y += p.vy;
+
+p.a -= .012;
+
+
+ctx.globalAlpha =
+Math.max(
+0,
+p.a
+);
+
+
+ctx.fillStyle =
+[
+"#9a7650",
+"#6f8f5f",
+"#d9a441",
+"#c96f5b"
+]
+[
+Math.floor(
+Math.random()*4
+)
+];
+
+
+ctx.fillRect(
+p.x,
+p.y,
+p.s,
+p.s
+);
+
+});
+
+
+frame++;
+
+
+if(frame<100){
+
+requestAnimationFrame(
+animate
+);
+
+}
+else{
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+}
+
+}
+
+
+animate();
+
+}
+
+
+
+/* =========================
+   啟動
+========================= */
+
 document.getElementById(
 "affirmation"
-).textContent=
+).textContent =
 defaultAffirmations[0];
+
 
 render();
 
 </script>
 
-</body>o
+</body>
 </html>
